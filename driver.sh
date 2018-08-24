@@ -87,12 +87,35 @@ function cmd_setup () {
 }
 
 
+function cmd_urls () {
+    # Validate arg
+
+    term="$1"
+
+    if [ $# -ne 1 ] ; then
+        echo >&2 "error: unexpected extra argument(s) after the search term"
+        exit 1
+    fi
+
+    # OK, we can get going.
+
+    vagrant_up
+    cfg_tmp=$(mktemp)
+    vagrant ssh-config >$cfg_tmp
+    ssh -F $cfg_tmp default \
+        powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
+        -File c:\\\\vagrant\\\\urls.ps1 -query "$term"
+    rm -f $cfg_tmp
+}
+
+
 function usage () {
     echo "Usage: $0 COMMAND [arguments...]  where COMMAND is one of:"
     echo ""
     echo "   build    Build a Windows package"
     echo "   search   Search by package name on the Windows box"
     echo "   setup    Set up the system for operation"
+    echo "   urls     Print URLs associated with a Windows package search"
     echo ""
     exit 0
 }
@@ -115,6 +138,8 @@ case "$command" in
         cmd_search "$@" ;;
     setup)
         cmd_setup "$@" ;;
+    urls)
+        cmd_urls "$@" ;;
     *)
         echo >&2 "error: unrecognized COMMAND \"$command\""
         usage ;;
