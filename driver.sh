@@ -104,7 +104,7 @@ function cmd_urls () {
     vagrant ssh-config >$cfg_tmp
     ssh -F $cfg_tmp default \
         powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
-        -File c:\\\\vagrant\\\\urls.ps1 -query "$term"
+        -File c:\\\\vagrant\\\\urls.ps1 -query "\"$term\""
     rm -f $cfg_tmp
 }
 
