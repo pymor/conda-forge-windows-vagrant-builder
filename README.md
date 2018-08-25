@@ -89,6 +89,12 @@ package, which is helpful for investigating exactly which files it provides:
 ./driver.sh urls m2w64-gettext
 ```
 
+The `purge` command will run `conda build purge`:
+
+```
+./driver.sh purge
+```
+
 
 # Implementation Notes
 

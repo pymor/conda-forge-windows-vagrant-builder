@@ -45,6 +45,18 @@ function cmd_build () {
 }
 
 
+function cmd_purge () {
+    vagrant_up
+    cfg_tmp=$(mktemp)
+    vagrant ssh-config >$cfg_tmp
+
+    ssh -F $cfg_tmp default \
+        powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
+        -Command "c:\\\\tools\\\\miniconda3\\\\scripts\\\\conda build purge"
+    rm -f $cfg_tmp
+}
+
+
 function cmd_search () {
     # Validate arg
 
@@ -113,6 +125,7 @@ function usage () {
     echo "Usage: $0 COMMAND [arguments...]  where COMMAND is one of:"
     echo ""
     echo "   build    Build a Windows package"
+    echo "   purge    Run \"conda build purge\" in the Windows box"
     echo "   search   Search by package name on the Windows box"
     echo "   setup    Set up the system for operation"
     echo "   urls     Print URLs associated with a Windows package search"
@@ -134,6 +147,8 @@ shift
 case "$command" in
     build)
         cmd_build "$@" ;;
+    purge)
+        cmd_purge "$@" ;;
     search)
         cmd_search "$@" ;;
     setup)
