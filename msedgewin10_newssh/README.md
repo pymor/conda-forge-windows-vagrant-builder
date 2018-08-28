@@ -66,6 +66,7 @@ derive your own purpose-specific boxes from this new base box.
    ```
    $ vagrant box add --name msedgewin10_newssh_$VMVERSION msedgewin10_newssh_$VMVERSION.box
    ```
+   You can delete the `.box` file after this step if you want.
 
 If you create a derived box using this new box as base, you will be able to
 SSH into it and get a pretty decent interactive PowerShell prompt. To
