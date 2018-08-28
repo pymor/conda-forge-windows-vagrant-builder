@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.guest = :windows
+  config.vm.boot_timeout = 1200
+  config.vm.graceful_halt_timeout = 1200
+  config.vm.communicator = 'winssh'
+  config.ssh.username = "IEUser"
+  config.ssh.password = "Passw0rd!"
+  config.winssh.shell = 'powershell'
+  config.winrm.username = config.ssh.username
+  config.winrm.password = config.ssh.password
+end
