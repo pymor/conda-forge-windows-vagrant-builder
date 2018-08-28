@@ -21,8 +21,6 @@ function Get-ObjectMembers {
     }
 }
 
-$env:Path += ";c:\tools\miniconda3\Scripts"
-
 conda info --json $query |ConvertFrom-Json |Get-ObjectMembers |foreach {
     $package = $_.Key
 

@@ -6,8 +6,6 @@ param (
 
 ### Set-PSDebug -Trace 2  # for detailed debugging
 
-$env:Path += ";c:\tools\miniconda3\Scripts"
-
 $feedstock = $feedstock -replace '/', '\\'
 cd c:\$feedstock
 $yamls = @(Get-ChildItem .ci_support/win*vs2015*.yaml)
