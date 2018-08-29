@@ -10,10 +10,10 @@ $feedstock = $feedstock -replace '/', '\\'
 cd c:\$feedstock
 $yamls = @(Get-ChildItem .ci_support/win*vs2015*.yaml)
 
-if ($yamls.Length > 0) {
+if ($yamls.Length -gt 0) {
    $config = $yamls[0]
 } else {
    $config = @(Get-ChildItem .ci_support/win*.yaml)[0]
 }
 
-conda build recipe -m c:\tools\miniconda3\conda_build_config.yaml -m $config
+conda build recipe -m $config
