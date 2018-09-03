@@ -36,11 +36,12 @@ function cmd_build () {
     vagrant_up
     cfg_tmp=$(mktemp)
     vagrant ssh-config >$cfg_tmp
+    logfile="$feedstock"/windows-build.log
 
-    echo "Building; logs also captured to \"build.log\" ..."
+    echo "Building; logs also captured to \"$logfile\" ..."
     ssh -F $cfg_tmp default \
         powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
-        -File c:\\\\vagrant\\\\build.ps1 -feedstock "$feedstock" |& tee build.log
+        -File c:\\\\vagrant\\\\build.ps1 -feedstock "$feedstock" |& tee "$logfile"
     rm -f $cfg_tmp
 }
 
