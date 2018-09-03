@@ -13,7 +13,12 @@ $yamls = @(Get-ChildItem .ci_support/win*vs2015*.yaml)
 if ($yamls.Length -gt 0) {
    $config = $yamls[0]
 } else {
-   $config = @(Get-ChildItem .ci_support/win*.yaml)[0]
+   $yamls = @(Get-ChildItem .ci_support/win*.yaml)
+   if ($yamls.Length -gt 0) {
+      $config = $yamls[0]
+   } else {
+      throw "no config YAML .ci_support/win*.yaml found -- did you rerender for Windows?"
+   }
 }
 
 $env:VS140COMNTOOLS = "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\"
