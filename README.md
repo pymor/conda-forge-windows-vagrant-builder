@@ -102,4 +102,5 @@ Vagrant box. The box is provisioned with a batch file named `condabash`, that
 will in turn drop you into a bash shell configured with the relevant Conda
 environment. The provisioning process installs the MSYS2 `posix` package,
 which provides an environment that is relatively close to a standard Unix
-shell.
+shell. The conda-forge install lives in `C:\Tools\Miniconda3`, A.K.A
+`/c/tools/miniconda3` according to Unix tools.

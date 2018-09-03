@@ -11,9 +11,9 @@ configured in such a way that makes them very hard to use in a
 non-interactive/headless setting, especially if your host OS is Linux where
 your only way to communicate with them is using
 [SSH](https://en.wikipedia.org/wiki/Secure_Shell). In particular, the SSH
-server drops you into a `sh` shell that has almost no useful commands install,
-and doesn’t provide full TTY support so that interactive usage is extremely,
-extremely painful.
+server drops you into a `sh` shell that has almost no useful commands
+installed, and doesn’t provide full TTY support so that interactive usage is
+extremely, extremely painful.
 
 The files and methodology in this directory will yield a new “base box” that
 has minimal modifications from the official VMs, but are much easier to
