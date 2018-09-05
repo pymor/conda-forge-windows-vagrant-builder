@@ -16,21 +16,24 @@ if (!(Test-Path("$ChocoInstallPath\choco.exe"))) {
 choco feature enable -n allowGlobalConfirmation
 choco upgrade all
 
-# Installing Miniconda3 is now straightforward:
+# Installing Miniconda3 is now straightforward -- except that we MUST install
+# it in a prefix whose name is all lowercase, since conda-build does
+# case-sensitive searching for path prefixes when packaging and CMake likes to
+# lowercasify the paths that it works with.
 
-choco install miniconda3
-$env:Path += ";c:\tools\miniconda3\Scripts"
+choco install miniconda3 --params="'/D:C:\mc3'"
+$env:Path += ";C:\mc3\Scripts"
 
 $k = 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'
 $path = (Get-ItemProperty -Path $k -Name PATH).path
-$path = "$path;C:\Tools\Miniconda3\Scripts"
+$path = "$path;C:\mc3\Scripts"
 Set-ItemProperty -Path $k -Name PATH -Value $path
 
 # The conda-forge shell+build environment:
 
 conda config --add channels conda-forge
 conda update --all -y
-conda install -y conda-build conda-forge-pinning m2-bzip2 m2-vim posix
+conda install -y conda-build conda-forge-pinning m2w64-binutils m2-bzip2 m2-git m2-vim posix
 conda clean -tipsy
 
 # Finally, Visual Studio 2015 build tools. Note that with the "right"
@@ -39,6 +42,7 @@ conda clean -tipsy
 
 choco install vcbuildtools --package-parameters "/InstallSelectableItems NativeLanguageSupport_VC"
 
-# VS2017:
-# choco install visualstudio2017buildtools --package-parameters
-#   "--passive --locale en-US --add Microsoft.VisualStudio.Workload.VCTools"
+# Message to user
+
+echo
+echo "Now run \"vagrant reload\" for OS changes to take full effect."

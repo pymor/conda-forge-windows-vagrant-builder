@@ -53,7 +53,7 @@ function cmd_purge () {
 
     ssh -F $cfg_tmp default \
         powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
-        -Command "c:\\\\tools\\\\miniconda3\\\\scripts\\\\conda build purge"
+        -Command "c:\\\\mc3\\\\scripts\\\\conda build purge"
     rm -f $cfg_tmp
 }
 
@@ -75,7 +75,7 @@ function cmd_search () {
     vagrant ssh-config >$cfg_tmp
     ssh -F $cfg_tmp default \
         powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
-        -Command "c:\\\\tools\\\\miniconda3\\\\scripts\\\\conda search *$term*"
+        -Command "c:\\\\mc3\\\\scripts\\\\conda search *$term*"
     rm -f $cfg_tmp
 }
 
