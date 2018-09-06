@@ -46,6 +46,31 @@ function cmd_build () {
 }
 
 
+function cmd_pull () {
+    # Validate arg
+
+    windows_path="$1"
+
+    if [ $# -ne 1 ] ; then
+        echo >&2 "error: unexpected extra argument(s) after the path of the file to copy"
+        exit 1
+    fi
+
+    # OK, we can get going.
+
+    vagrant_up
+    cfg_tmp=$(mktemp)
+    vagrant ssh-config >$cfg_tmp
+
+    windows_path=$(echo "$windows_path" |sed -e 's|\\|\\\\|g')
+
+    ssh -F $cfg_tmp default \
+        powershell -NoProfile -NoLogo -InputFormat None -ExecutionPolicy Bypass \
+        -Command "cp \"$windows_path\" c:\\\\vagrant"
+    rm -f $cfg_tmp
+}
+
+
 function cmd_purge () {
     vagrant_up
     cfg_tmp=$(mktemp)
@@ -153,6 +178,8 @@ shift
 case "$command" in
     build)
         cmd_build "$@" ;;
+    pull)
+        cmd_pull "$@" ;;
     purge)
         cmd_purge "$@" ;;
     search)

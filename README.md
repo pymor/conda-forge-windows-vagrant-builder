@@ -94,6 +94,14 @@ The `purge` command will run `conda build purge`:
 ./driver.sh purge
 ```
 
+The `pull` command will copy a *Windows-format* path to the directory
+containing this file. Note that you must properly quote the Windows path
+so that your Unix shell doesn’t eat the backslashes it likely contains.
+
+```
+./driver.sh pull 'C:\mc3\conda-bld\win-64\freetype-2.9.1-he8b6a0d_4.tar.bz2'
+```
+
 
 ## More details
 
