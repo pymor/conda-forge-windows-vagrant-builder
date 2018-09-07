@@ -44,6 +44,13 @@ mkdir $cfgdir/oldkeys
 mv $cfgdir/ssh_host_* $cfgdir/oldkeys
 mv $cfgdir/oldkeys/ssh_host_rsa_key* $cfgdir/
 
+# We also need to modify the server config for SFTP to work. By default,
+# however, when doing this sort of text processing PowerShell inserts a UTF8
+# Byte Order Marker that messes up SSHD. The technique below avoids it.
+
+$cfg = Get-Content $cfgdir\sshd_config | %{ $_ -replace "^Subsystem.*sftp.*", "Subsystem sftp sftp-server.exe" }
+[IO.File]::WriteAllLines("$cfgdir\sshd_config", $cfg)
+
 # Install the new SSH daemon, and fix up permissions. Note that a prior
 # Vagrant provisioning step should have created our user's authorized_keys
 # file using insecure Vagrant key.
