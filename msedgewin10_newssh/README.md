@@ -68,6 +68,10 @@ derive your own purpose-specific boxes from this new base box.
    ```
    You can delete the `.box` file after this step if you want.
 
+The last three steps are automated in the script `make-the-box.sh`. It’s
+recommended that you go through the full process manually the first time,
+however, in case anything funky happens with your Vagrant setup.
+
 If you create a derived box using this new box as base, you will be able to
 SSH into it and get a pretty decent interactive PowerShell prompt. To
 provision it with a PowerShell script, use the following parameters:
