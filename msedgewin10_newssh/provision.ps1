@@ -38,11 +38,11 @@ rm 'OpenSSH-Win64.zip'
 # broadest compatibility.
 
 mkdir $cfgdir
-cp $oldssh/etc/* $cfgdir/
+cp $oldssh\etc\* $cfgdir
 
-mkdir $cfgdir/oldkeys
-mv $cfgdir/ssh_host_* $cfgdir/oldkeys
-mv $cfgdir/oldkeys/ssh_host_rsa_key* $cfgdir/
+mkdir $cfgdir\oldkeys
+mv $cfgdir\ssh_host_* $cfgdir\oldkeys
+mv $cfgdir\oldkeys/ssh_host_rsa_key* $cfgdir
 
 # We also need to modify the server config for SFTP to work. By default,
 # however, when doing this sort of text processing PowerShell inserts a UTF8
