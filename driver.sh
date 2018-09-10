@@ -130,6 +130,34 @@ function cmd_setup () {
 }
 
 
+function cmd_sshfs () {
+    # Validate arg
+
+    local_path="$1"
+
+    if [ $# -ne 1 ] ; then
+        echo >&2 "error: unexpected extra argument(s) after the local path"
+        exit 1
+    fi
+
+    # OK, we can get going. Note: My sshfs has a bug where the path to the SSH
+    # config file must be absolute. Other options:
+    #
+    # idmap=user - try to map same-user IDs between filesystems; seems desirable
+    # transform_symlinks - make absolute symlinks relative; also seems desirable
+    # workaround=rename - make it so that rename-based overwrites work; needed
+    #   for Vim to save files
+
+    mkdir -p "$local_path"
+    vagrant_up
+    cfg_tmp=$(mktemp)
+    vagrant ssh-config >$cfg_tmp
+    sshfs -F $(realpath $cfg_tmp) -o idmap=user -o transform_symlinks \
+          -o workaround=rename default:/C: "$local_path"
+    rm -f $cfg_tmp
+}
+
+
 function cmd_urls () {
     # Validate arg
 
@@ -186,6 +214,8 @@ case "$command" in
         cmd_search "$@" ;;
     setup)
         cmd_setup "$@" ;;
+    sshfs)
+        cmd_sshfs "$@" ;;
     urls)
         cmd_urls "$@" ;;
     *)

@@ -81,6 +81,25 @@ by MSYS2. For example:
 ./driver.sh search gettext
 ```
 
+The command `sshfs` will mount the C: drive of the Windows machine on the
+specified local path (creating it if necessary) using the
+[sshfs](https://github.com/libfuse/sshfs) filesystem (i.e., a userspace
+network mount using SFTP behind the scenes). This can be an absolute lifesaver
+since the Windows SSH terminal emulator is not correct enough to run an
+interactive text editor.
+
+```
+./driver.sh sshfs winfs
+```
+
+Use the command `fusermount -u {local_path}` to manually unmount the SSHFS
+filesystem. Note that Emacs has trouble saving files within such a mount: when
+overwriting an existing file, it wants to use the `O_TRUNC` flag, but it seems
+that the Windows SFTP subsystem doesn’t support the truncation operation.
+Sadly, setting
+[file-precious-flag](https://www.gnu.org/software/emacs/manual/html_node/elisp/Saving-Buffers.html)
+doesn’t seem to help. Vim can save files just fine.
+
 Another one will print out the URLs to the tarballs associated with a particular
 package, which is helpful for investigating exactly which files it provides:
 
