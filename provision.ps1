@@ -42,6 +42,17 @@ conda clean -tipsy
 
 choco install vcbuildtools --package-parameters "/InstallSelectableItems NativeLanguageSupport_VC"
 
+# The Visual Studio installer has a somewhat infuriating bug where it
+# apparently will just not install all files correctly. In particular, it
+# often fails to install the debugging version of the C runtime DLL in all
+# necessary locations. This hack gets things going better. The recommended
+# workaround seems to be to just keep on uninstalling and reinstalling Visual
+# Studio until it works, which is ... dumb.
+#
+# Ref: https://stackoverflow.com/q/33743493/3760486
+
+cp "C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt\ucrtbased.dll" C:\Windows\System32
+
 # Message to user
 
 echo
