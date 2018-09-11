@@ -11,8 +11,8 @@ machine) that does the actual package building.
 
 In order to use this system, you of course need to have Vagrant installed.
 
-You will also need about 20 GiB of free disk space to store the various
-virtual machine images used in this process.
+You will also need about 40 GiB of free disk space to store the various
+virtual machine images used in this process. Yikes!
 
 You also need to specify or create the directory that will contain the files
 for the various feedstocks that you intend to build within the Windows Vagrant
