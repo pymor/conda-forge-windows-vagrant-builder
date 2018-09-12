@@ -55,5 +55,5 @@ cp "C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt\ucrtbased.dll" C:\Window
 
 # Message to user
 
-echo
-echo "Now run \"vagrant reload\" for OS changes to take full effect."
+echo ""
+echo "Now run `"vagrant reload`" for OS changes to take full effect."
