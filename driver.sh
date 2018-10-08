@@ -184,9 +184,11 @@ function usage () {
     echo "Usage: $0 COMMAND [arguments...]  where COMMAND is one of:"
     echo ""
     echo "   build    Build a Windows package"
+    echo "   pull     Copy a file from the box to the local filesystem"
     echo "   purge    Run \"conda build purge\" in the Windows box"
     echo "   search   Search by package name on the Windows box"
     echo "   setup    Set up the system for operation"
+    echo "   sshfs    Mount the Windows filesystem locally using sshfs"
     echo "   urls     Print URLs associated with a Windows package search"
     echo ""
     exit 0
