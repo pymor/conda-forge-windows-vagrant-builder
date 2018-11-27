@@ -31,7 +31,9 @@ about.
 Finally, you will need to create a new “base box” that modifies
 [the official Microsoft VM images](https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/)
 to work with SSH. The files and instructions for doing so are in
-[the `msedgewin10_newssh` subdirectory](./msedgewin10_newssh/README.md).
+[the `msedgewin10_newssh` submodule](./msedgewin10_newssh/README.md). If this
+directory is empty, use the command `git submodule update --init --recursive`
+to populate it.
 
 
 ## Usage

@@ -1,0 +1,3 @@
+[submodule "msedgewin10_newssh"]
+	path = msedgewin10_newssh
+	url = https://github.com/pkgw/msedgewin10-newssh-box.git
