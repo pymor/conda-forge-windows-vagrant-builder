@@ -20,13 +20,17 @@ choco upgrade all
 # it in a prefix whose name is all lowercase, since conda-build does
 # case-sensitive searching for path prefixes when packaging and CMake likes to
 # lowercasify the paths that it works with.
+#
+# Because we won't be running from the Anaconda Prompt, we have to set up the
+# correct environment manually. In particular, we have to make sure that DLLs
+# are in $PATH because Windows is terrible.
 
 choco install miniconda3 --params="'/D:C:\mc3'"
-$env:Path += ";C:\mc3\Scripts"
+$env:Path += ";C:\mc3;C:\mc3\Library\mingw-w64\bin;C:\mc3\Library\bin;C:\mc3\Scripts"
 
 $k = 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'
 $path = (Get-ItemProperty -Path $k -Name PATH).path
-$path = "$path;C:\mc3\Scripts"
+$path = "$path;C:\mc3;C:\mc3\Library\mingw-w64\bin;C:\mc3\Library\bin;C:\mc3\Scripts"
 Set-ItemProperty -Path $k -Name PATH -Value $path
 
 # The conda-forge shell+build environment:
