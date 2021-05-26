@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "pyMOR_base"
+  config.vm.guest = :windows
+  config.vm.boot_timeout = 1200
+  config.vm.graceful_halt_timeout = 1200
+
+  config.vm.communicator = 'ssh'
+  config.ssh.username = "IEUser"
+  config.ssh.password = "Passw0rd!"
+  config.ssh.insert_key = false
+  config.ssh.shell = 'sh -l'
+
+  config.vm.provision "file", source: "vagrant_insecure_key.pub", destination: ".ssh/authorized_keys"
+
+  config.vm.provision "shell",
+                      binary: true,
+                      privileged: false,
+                      inline: 'powershell -InputFormat None -NoProfile -ExecutionPolicy Bypass -File c:\\\\vagrant\\\\provision.ps1'
+end

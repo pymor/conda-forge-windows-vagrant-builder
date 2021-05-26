@@ -124,7 +124,6 @@ function cmd_setup () {
         exit 1
     fi
 
-    echo "$base_box" >.cfg_base_box
     echo "Setup complete."
     return 0
 }

@@ -48,7 +48,7 @@ An example name of the resulting box might be `msedgewin10_newssh_17.17134`.
 Just pass that name as an argument to the `setup` command:
 
 ```
-./driver.sh setup msedgewin10_newssh_17.17134
+./driver.sh setup pyMOR_base
 ```
 
 Once that’s done, the most important subcommand is `build`, which uses
