@@ -106,17 +106,8 @@ function cmd_search () {
 
 
 function cmd_setup () {
-    # Validate arg
-
-    base_box="$1"
-
-    if [ $# -ne 1 ] ; then
-        echo >&2 "error: unexpected extra argument(s) after the base box name"
-        exit 1
-    fi
 
     # OK, we can get going.
-
     if [ ! -e feedstocks ] ; then
         echo >&2 "error: create a directory or symbolic link here named \"feedstocks\""
         echo >&2 "       inside of which your feedstocks will reside. For example,"

@@ -4,7 +4,7 @@
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 
 Vagrant.configure("2") do |config|
-  config.vm.box = pyMOR_base
+  config.vm.box = "pyMOR_base"
 
   config.vm.provision :file,
                       source: "condabash.bat",
